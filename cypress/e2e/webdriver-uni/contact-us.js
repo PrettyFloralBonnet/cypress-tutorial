@@ -15,6 +15,7 @@ describe("Test Contact Us form on WebDriverUni", () => {
         );
 
         cy.get('[type="submit"]').click();
+        cy.get("h1").should("have.text", "Thank You for your Message!");
     })
 
     it("Should fail to submit data via the form due to an empty email field", () => {
