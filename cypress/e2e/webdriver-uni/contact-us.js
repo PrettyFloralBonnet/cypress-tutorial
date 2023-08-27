@@ -29,5 +29,6 @@ describe("Test Contact Us form on WebDriverUni", () => {
         cy.get('textarea.feedback-input').type("How do I shut this thing down?");
 
         cy.get('[type="submit"]').click();
+        cy.get("body").contains("Error: all fields are required");
     })
 })
