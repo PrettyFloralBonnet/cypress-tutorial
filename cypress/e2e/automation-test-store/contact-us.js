@@ -10,5 +10,11 @@ describe("Test Contact Us form on Automation Test Store", () => {
         cy.get("#ContactUsFrm_enquiry").type("How do I shut this thing down?");
 
         cy.xpath("//button[@title='Submit']").click();
+
+        cy.xpath("//p[text()[contains(., 'enquiry has been successfully sent')]]")
+            .should(
+                "have.text",
+                "Your enquiry has been successfully sent to the store owner!"
+            );
     })
 })
