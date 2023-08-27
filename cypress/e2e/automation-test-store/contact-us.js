@@ -6,7 +6,11 @@ describe("Test Contact Us form on Automation Test Store", () => {
         cy.xpath("//a[contains(@href, 'contact')]").click();
 
         cy.get("#ContactUsFrm_first_name").type("John");
-        cy.get("#ContactUsFrm_email").type("john.shepard@citadel.net");
+
+        const emailInput = cy.get("#ContactUsFrm_email");
+        emailInput.type("john.shepard@citadel.net");
+        emailInput.should("have.attr", "name", "email");
+
         cy.get("#ContactUsFrm_enquiry").type("How do I shut this thing down?");
 
         cy.xpath("//button[@title='Submit']").click();
