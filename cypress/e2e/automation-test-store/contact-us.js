@@ -20,5 +20,6 @@ describe("Test Contact Us form on Automation Test Store", () => {
                 "have.text",
                 "Your enquiry has been successfully sent to the store owner!"
             );
-    })
+        cy.log("Test completed.")
+    });
 })
