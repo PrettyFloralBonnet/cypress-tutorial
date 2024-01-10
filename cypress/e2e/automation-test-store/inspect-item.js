@@ -3,7 +3,8 @@
 describe("Inspect Automation Test Store items", () => {
     it("Click on the first item using item text", () => {
         cy.visit("https://automationteststore.com/");
-        cy.get("a.prdocutname").contains("Skinsheen Bronzer Stick").click();
+        cy.get("a.prdocutname").contains("Skinsheen Bronzer Stick").click()
+            .then(item => { cy.log(item.text()) });
     });
 
     it("Click on the first item using its index", () => {
