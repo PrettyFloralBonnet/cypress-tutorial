@@ -11,4 +11,16 @@ describe("Inspect Automation Test Store items", () => {
         cy.visit("https://automationteststore.com/");
         cy.get(".fixed_wrapper").find(".prdocutname").eq(0).click();
     });
+
+    it("Navigating to specific product pages", () => {
+        cy.visit("https://automationteststore.com/");
+        cy.get("#categorymenu").find("a[href]").contains("Makeup").click();
+
+        cy.get("h1 .maintext").then(($element) => {
+            const headerText = $element.text();
+            cy.log(headerText);
+
+            expect(headerText).to.eq("Makeup");
+        });
+    });
 })
