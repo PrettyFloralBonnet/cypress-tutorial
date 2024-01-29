@@ -1,7 +1,7 @@
 /// <reference types="Cypress"> />
 
 describe("Test Contact Us form on Automation Test Store", () => {
-    it("Should be able to make a successful submission via the form", () => {
+    it("Makes a successful submission via the form", () => {
         cy.visit("https://automationteststore.com/");
         cy.xpath("//a[contains(@href, 'contact')]").click().then(item => {
             cy.log(item.text())
@@ -23,5 +23,32 @@ describe("Test Contact Us form on Automation Test Store", () => {
                 "Your enquiry has been successfully sent to the store owner!"
             );
         cy.log("Test completed.")
+    });
+
+    it("Validates the field names on the form", () => {
+        cy.visit("https://automationteststore.com/index.php?rt=content/contact");
+
+        // cypress commands and chaining
+        cy.contains("#ContactUsFrm", "Contact Us Form")
+            .should("contain.text", "First name")
+            .and("contain.text", "Email")
+            .and("contain.text", "Enquiry")
+
+        // jQuery
+        cy.contains("#ContactUsFrm", "Contact Us Form").then($form => {
+            const firstNameText = $form.find("#field_11").text();
+            const emailText = $form.find("#field_12").text();
+            const enquiryText = $form.find("#field_13").text();
+
+            expect(firstNameText).to.contain("First name");
+            expect(emailText).to.contain("Email");
+            expect(enquiryText).to.contain("Enquiry");
+
+            // embedded cypress commands (closures)
+            cy.get("#field_11").then($div => {
+                const firstNameText = $div.text();
+                expect(firstNameText).to.contain("First name");
+            })
+        })
     });
 })
